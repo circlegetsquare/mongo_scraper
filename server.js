@@ -1,6 +1,3 @@
-/* Showing Mongoose's "Populated" Method
- * =============================================== */
-
 // Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -46,8 +43,9 @@ db.once("open", function() {
 // Routes
 // ======
 
-// A GET request to scrape the echojs website
+// A GET request to scrape the Google News website
 app.get("/scrape", function(req, res) {
+  var newArticleCount = 1;
   // First, we grab the body of the html with request
   request("https://news.google.com/news/?ned=us&hl=en", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -70,20 +68,25 @@ app.get("/scrape", function(req, res) {
 
       // Now, save that entry to the db
       entry.save(function(err, doc) {
+        
         // Log any errors
         if (err) {
-          console.log(err);
+          console.log("err");
         }
         // Or log the doc
         else {
           console.log(doc);
+          newArticleCount++;
+          console.log(newArticleCount);
         }
       });
-
     });
+    res.json(newArticleCount);
   });
   // Tell the browser that we finished scraping the text
-  res.send("Scrape Complete");
+  //console.log("Scrape Complete");
+  //res.sendStatus(newArticleCount);
+  
 });
 
 // This will get the articles we scraped from the mongoDB
@@ -92,11 +95,45 @@ app.get("/articles", function(req, res) {
   Article.find({}, function(error, doc) {
     // Log any errors
     if (error) {
-      console.log(error);
+      console.log("error");
     }
     // Or send the doc to the browser as a json object
     else {
       res.json(doc);
+    }
+  });
+});
+
+
+
+// This will get the notes from MongoDB
+app.get("/notes/:id", function(req, res) {
+  // Grab every doc in the Articles array
+  Note.find({ "articleId": req.params.id }, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log("error");
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+      //console.log(doc);
+    }
+  });
+});
+
+// This will delete a note
+app.delete("/note-delete/:id", function(req, res) {
+  // Grab every doc in the Articles array
+  Note.findOneAndRemove({ "_id": req.params.id }, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log("error");
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+      //console.log(doc);
     }
   });
 });
@@ -121,7 +158,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 
-// Create a new note or replace an existing note
+// Create a new note
 app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   var newNote = new Note(req.body);

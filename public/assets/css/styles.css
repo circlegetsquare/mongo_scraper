@@ -1,0 +1,39 @@
+body { background-color: #EBEBEB }
+#wrapper {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+}
+#articles {
+  display: inline-block;
+  overflow: auto;
+  width: 60%;
+  height: 700px;
+}
+#notes {
+  float: right;
+  width: 30%;
+}
+textarea {
+  clear: both;
+  padding: 10px;
+  margin: 0 auto;
+  resize: none;
+  width: 100%;
+}
+.modal-footer {
+  border: 0px;
+}
+.note-delete {
+  float:right;
+}
+
+.note.list-group-item {
+  padding: 30px;
+}
+
+.note.list-group-item .btn {
+  position: relative;
+  bottom: 10px;
+}
