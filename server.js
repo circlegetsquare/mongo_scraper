@@ -12,9 +12,11 @@ var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
-
 // Initialize Express
 var app = express();
+
+//Dynamic Ports
+var port = process.env.PORT || 3000;
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -189,7 +191,7 @@ app.post("/articles/:id", function(req, res) {
 });
 
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+// Set port to listen
+app.listen(port, function() {
+  console.log("App running on port " + port + "!");
 });
