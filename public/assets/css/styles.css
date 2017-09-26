@@ -1,26 +1,51 @@
-body { background-color: #EBEBEB }
-#wrapper {
+html {
+  height: 100%;
+}
+
+body {
+  background: #757F9A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  height: 100%;
+  }
+
+h1 {
+  font-family: 'Monoton', cursive;
+  color: white;
+  font-size: 50px;
+}
+.wrapper {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 5%;
+  padding-top: 25px;
 }
-#articles {
-  display: inline-block;
+
+.header {
+  margin: auto;
+  text-align: center;
+}
+.articles {
   overflow: auto;
+  margin: auto;
+  margin-top: 15px;
   width: 60%;
   height: 700px;
+  padding: 20px 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #303030;
 }
-#notes {
-  float: right;
-  width: 30%;
+
+.article-title {
+  cursor: pointer;
 }
 textarea {
   clear: both;
   padding: 10px;
-  margin: 0 auto;
+  margin: 0px 15px;
   resize: none;
-  width: 100%;
+  width: 568px;
 }
 .modal-footer {
   border: 0px;
@@ -29,11 +54,21 @@ textarea {
   float:right;
 }
 
-.note.list-group-item {
-  padding: 30px;
+.list-group-item {
+  width: 568px;
+  height: 45px;
+  margin: auto;
+  margin-top: 15px;
 }
 
-.note.list-group-item .btn {
-  position: relative;
-  bottom: 10px;
+.btn {
+  padding: 3px 6px;
+  display: inline;
+  margin: auto;
+}
+
+#scrape-button {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }

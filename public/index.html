@@ -5,14 +5,18 @@
     <title>Scraping With Mongoose</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
   </head>
   <body>
-    <div id="wrapper">
-      <h1>Google News Scraper</h1>
-      <div id="articles"></div>
-      <div id="notes">
-        <button type="button" class="btn btn-warning" id="scrape-button">Scrape New Articles</button></div>
+    <div class="wrapper">
+      <div class="header">
+        <h1>Google News Scraper</h1>
+      </div>
+      <div class="header">
+          <button type="button" class="btn btn-warning" id="scrape-button">Get New Articles</button>
+        </div>
     </div>
+      <div class="articles" id="articles"></div>
     <div class="modal" id="notes-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

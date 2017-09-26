@@ -5,7 +5,7 @@ var displayArticles = function() {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").prepend('<p data-id="' + data[i]._id + '">' + data[i].title + '<br /><a href=' + data[i].link + ' target="blank">' + data[i].source + ' </a></p>');
+      $("#articles").prepend('<span class="article-title" data-id="' + data[i]._id + '">' + data[i].title + '</span><br /><a href=' + data[i].link + ' target="blank">' + data[i].source + ' </a><hr>');
     }
   });
 };
@@ -22,7 +22,7 @@ $(document).on("click", "#scrape-button", function(){
 });
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$(document).on("click", ".article-title", function() {
   // Empty the notes from the note section
   $("#modal-body").empty();
   $('#notes-modal').modal('show');
@@ -83,12 +83,19 @@ $(document).on("click", "#savenote", function() {
     }
   })
     // With that done
-    .done(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      //$("#noteinput").empty();
-    });
+    .done(        $.ajax({
+      method: "GET",
+      url: "/notes/" + thisId
+    })
+    // Place the body of the note in the body textarea
+    .done(function(data){
+      var html = "<ul class='list-group note-container'>";
+      for (var i = 0; i < data.length; i++) {
+        html += "<li class='list-group-item note'>" + data[i].note + "<button class='btn btn-danger note-delete' id=" + data[i]._id + ">x</button></li>";
+        };
+      html += "</ul>";
+      $("#modal-notes").empty().append(html);
+    }));
 
   // Also, remove the values entered in the input and textarea for note entry
   $("#noteinput").val("");
